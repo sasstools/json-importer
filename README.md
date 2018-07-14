@@ -48,7 +48,7 @@ $colors: map-get($config, "colors");
 $sizes: map-get($config, "sizes");
 
 .button {
-  color: map-get($color, "red");
+  color: map-get($colors, "red");
   size: nth($sizes, 2);
 }
 ```
