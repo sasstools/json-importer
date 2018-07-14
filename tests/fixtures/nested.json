@@ -1,0 +1,10 @@
+{
+  "colors": {
+    "red": "#f00",
+    "blue": "#00f"
+  },
+  "sizes": {
+    "small": "16px",
+    "big": "30px"
+  }
+}

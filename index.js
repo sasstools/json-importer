@@ -1,0 +1,49 @@
+const fs = require('fs');
+const path = require('path');
+
+const exists = (file) => {
+  try {
+    fs.accessSync(file, fs.constants.F_OK);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+const buildSassValue = (value) => {
+  if (Array.isArray(value)) {
+    return `(${value.reduce((prev, cur) => prev + `"${cur}",`, '')})`;
+  }
+  if (typeof value === "object") {
+    return `(${buildSassMap(value)})`;
+  }
+  return `"${value}"`;
+}
+
+const buildSassMap = (json) => {
+  return Object.keys(json).reduce((prev, cur) => {
+    return prev + `"${cur}": ${buildSassValue(json[cur])},`;
+  }, '');
+}
+
+const end = (done) => (value) => {
+  return done ? done(value) : value;
+}
+
+module.exports = function(url, prev, done) {
+  done = end(done);
+  if (!url) return done(null);
+
+  const parts = url.split('/');
+  const name = path.basename(parts.pop(), '.json');
+  const cwd = process.cwd();
+  const resolved = path.join(cwd, url);
+
+  try {
+    var json = require(resolved);
+  } catch(err) {
+    return done(err);
+  }
+
+  return done({ contents: `$${name}: (${buildSassMap(json)});` });
+};
