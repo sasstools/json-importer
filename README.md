@@ -90,3 +90,10 @@ $ node-sass index.scss --importer node_modules/@node-sass/json-importer/index.js
 Sass has many types. `Number` which represent CSS numbers values with optional unit like `16px`. `Color` which represents CSS colour values like `red`, or `#f00`. These are structurally different from `String` like `"hello"`, `"16px"`, `"red"`, or `"#f00`.
 
 To reduce complexity the values produced by this importer are always `String`. As a result you may need to `unquote()` the values to cast them into their intended types if for example you wanted to do math on them.
+
+## Alternatives
+
+- [node-sass-json-importer][]
+
+
+[node-sass-json-importer]: https://github.com/Updater/node-sass-json-importer/pull/70/files
