@@ -7,19 +7,19 @@ const generate = (file) => `
 output { contents: inspect($${path.basename(file, '.json')}) }
 `;
 
-const compile = function(data) {
+const compile = function(data, options = {}) {
   return new Promise((yeah, nah) => {
     return sass.render(
-      { data, importer },
+      Object.assign({ data, importer }, options),
       (err, results) => err ? nah(err) : yeah(results.css.toString()),
     );
   });
 }
 
-const compileSync = function(data) {
+const compileSync = function(data, options = {}) {
   return new Promise((yeah, nah) => {
     try {
-      const results = sass.renderSync({ data, importer });
+      const results = sass.renderSync(Object.assign({ data, importer }, options));
       yeah(results.css.toString());
     } catch (err) {
       nah(err);
@@ -40,6 +40,10 @@ describe('json-importer', () => {
       ));
       it('should resolve json array values as Sass lists', () => (
         func(generate('tests/fixtures/list.json'))
+          .then(result => expect(result).toMatchSnapshot())
+      ));
+      it('should resolve json files in includePaths', () => (
+        func(generate('fixtures/flat.json'), { includePaths: ['tests']})
           .then(result => expect(result).toMatchSnapshot())
       ));
     });

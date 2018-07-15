@@ -37,13 +37,31 @@ module.exports = function(url, prev, done) {
   const parts = url.split('/');
   const name = path.basename(parts.pop(), '.json');
   const cwd = process.cwd();
-  const resolved = path.join(cwd, url);
+
+
+  const includePaths = this.options.includePaths.split(':')
+    .map(p => path.resolve(cwd, p));
 
   try {
-    var json = require(resolved);
+    let resolved = path.join(cwd, url);
+    if (exists(resolved)) {
+      var json = require(resolved);
+    } else {
+      for (let i = 0; i < includePaths.length; i++ ) {
+        resolved = path.join(includePaths[i], url);
+
+        if (exists(resolved)) {
+          var json = require(resolved);
+        }
+      }
+    }
   } catch(err) {
     return done(err);
   }
 
-  return done({ contents: `$${name}: (${buildSassMap(json)});` });
+  if (json) {
+    return done({ contents: `$${name}: (${buildSassMap(json)});` });
+  }
+
+  return done(null);
 };

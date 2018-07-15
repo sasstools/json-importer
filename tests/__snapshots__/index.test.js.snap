@@ -12,6 +12,12 @@ exports[`json-importer async should resolve json array values as Sass lists 1`] 
 "
 `;
 
+exports[`json-importer async should resolve json files in includePaths 1`] = `
+"output {
+  contents: (\\"color\\": \\"red\\", \\"size\\": \\"small\\"); }
+"
+`;
+
 exports[`json-importer async should resolve nested json strings as Sass map 1`] = `
 "output {
   contents: (\\"colors\\": (\\"red\\": \\"#f00\\", \\"blue\\": \\"#00f\\"), \\"sizes\\": (\\"small\\": \\"16px\\", \\"big\\": \\"30px\\")); }
@@ -27,6 +33,12 @@ exports[`json-importer sync should resolve flat json strings as Sass map 1`] = `
 exports[`json-importer sync should resolve json array values as Sass lists 1`] = `
 "output {
   contents: (\\"colors\\": \\"red green blue\\", \\"sizes\\": (\\"small\\", \\"medium\\", \\"big\\")); }
+"
+`;
+
+exports[`json-importer sync should resolve json files in includePaths 1`] = `
+"output {
+  contents: (\\"color\\": \\"red\\", \\"size\\": \\"small\\"); }
 "
 `;
 
