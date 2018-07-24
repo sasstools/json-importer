@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const csscolors = require('css-color-names');
 
 const exists = (file) => {
   try {
@@ -10,14 +11,33 @@ const exists = (file) => {
   }
 }
 
+const reValue = new RegExp([
+  // ---- hex colors
+  '^#[0-9a-z]{3}$',                       // #def
+  '^#[0-9a-z]{4}$',                       // #def0
+  '^#[0-9a-z]{6}$',                       // #ddeeff
+  '^#[0-9a-z]{8}$',                       // #ddeeff00
+  // ---- numbers
+  '^[0-9]+(?:\\.[0-9]+)?(?:%|[a-z]+)?$',  // 12.34 + unit
+  // ---- function calls
+  '^[a-z][a-z0-9-_]*\\(',                 // foo(...)
+].join('|'), 'i');
+
+const looksLikeString = (value) => {
+  return !reValue.test(value) || csscolors[value];
+}
+
 const buildSassValue = (value) => {
   if (Array.isArray(value)) {
-    return `(${value.reduce((prev, cur) => prev + `"${cur}",`, '')})`;
+    return `(${value.reduce((prev, cur) => prev + `${buildSassValue(cur)},`, '')})`;
   }
   if (typeof value === "object") {
     return `(${buildSassMap(value)})`;
   }
-  return `"${value}"`;
+  if (looksLikeString(value)) {
+    return `"${value}"`;
+  }
+  return value;
 }
 
 const buildSassMap = (json) => {

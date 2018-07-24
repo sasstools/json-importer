@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`json-importer async should not resolve Sass values to quoted strings 1`] = `
+"output {
+  contents: (\\"short-hex-color\\": #def, \\"short-hex-color-with-alpha\\": #def0, \\"long-hex-color\\": #ddeeff, \\"long-hex-color-with-alpha\\": #ddeeff00, \\"named-color\\": \\"red\\", \\"number\\": 16, \\"number-with-percentage\\": 16%, \\"number-with-word-unit\\": 16rem, \\"decimal\\": 12.34, \\"decimal-with-percentage\\": 12.34%, \\"decimal-with-word-unit\\": 12.34rem, \\"function-call\\": black, \\"string\\": \\"foo\\", \\"string-with-spaces\\": \\"who are you\\", \\"array\\": (16, 16px, 16%, 12.34, 12.34px, 12.34%, #def, black, \\"foo\\", \\"who are you\\"), \\"map\\": (\\"short-hex-color\\": #def, \\"short-hex-color-with-alpha\\": #def0, \\"string\\": \\"foo\\", \\"string-with-spaces\\": \\"who are you\\")); }
+"
+`;
+
 exports[`json-importer async should resolve flat json strings as Sass map 1`] = `
 "output {
   contents: (\\"color\\": \\"red\\", \\"size\\": \\"small\\"); }
@@ -20,7 +26,13 @@ exports[`json-importer async should resolve json files in includePaths 1`] = `
 
 exports[`json-importer async should resolve nested json strings as Sass map 1`] = `
 "output {
-  contents: (\\"colors\\": (\\"red\\": \\"#f00\\", \\"blue\\": \\"#00f\\"), \\"sizes\\": (\\"small\\": \\"16px\\", \\"big\\": \\"30px\\")); }
+  contents: (\\"colors\\": (\\"red\\": #f00, \\"blue\\": #00f), \\"sizes\\": (\\"small\\": 16px, \\"big\\": 30px)); }
+"
+`;
+
+exports[`json-importer sync should not resolve Sass values to quoted strings 1`] = `
+"output {
+  contents: (\\"short-hex-color\\": #def, \\"short-hex-color-with-alpha\\": #def0, \\"long-hex-color\\": #ddeeff, \\"long-hex-color-with-alpha\\": #ddeeff00, \\"named-color\\": \\"red\\", \\"number\\": 16, \\"number-with-percentage\\": 16%, \\"number-with-word-unit\\": 16rem, \\"decimal\\": 12.34, \\"decimal-with-percentage\\": 12.34%, \\"decimal-with-word-unit\\": 12.34rem, \\"function-call\\": black, \\"string\\": \\"foo\\", \\"string-with-spaces\\": \\"who are you\\", \\"array\\": (16, 16px, 16%, 12.34, 12.34px, 12.34%, #def, black, \\"foo\\", \\"who are you\\"), \\"map\\": (\\"short-hex-color\\": #def, \\"short-hex-color-with-alpha\\": #def0, \\"string\\": \\"foo\\", \\"string-with-spaces\\": \\"who are you\\")); }
 "
 `;
 
@@ -44,6 +56,6 @@ exports[`json-importer sync should resolve json files in includePaths 1`] = `
 
 exports[`json-importer sync should resolve nested json strings as Sass map 1`] = `
 "output {
-  contents: (\\"colors\\": (\\"red\\": \\"#f00\\", \\"blue\\": \\"#00f\\"), \\"sizes\\": (\\"small\\": \\"16px\\", \\"big\\": \\"30px\\")); }
+  contents: (\\"colors\\": (\\"red\\": #f00, \\"blue\\": #00f), \\"sizes\\": (\\"small\\": 16px, \\"big\\": 30px)); }
 "
 `;
