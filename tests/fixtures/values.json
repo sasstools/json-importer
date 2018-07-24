@@ -1,0 +1,34 @@
+{
+  "short-hex-color": "#def",
+  "short-hex-color-with-alpha": "#def0",
+  "long-hex-color": "#ddeeff",
+  "long-hex-color-with-alpha": "#ddeeff00",
+  "named-color": "red",
+  "number": "16",
+  "number-with-percentage": "16%",
+  "number-with-word-unit": "16rem",
+  "decimal": "12.34",
+  "decimal-with-percentage": "12.34%",
+  "decimal-with-word-unit": "12.34rem",
+  "function-call": "hsl(0,0,0)",
+  "string": "foo",
+  "string-with-spaces": "who are you",
+  "array": [
+    16,
+    "16px",
+    "16%",
+    12.34,
+    "12.34px",
+    "12.34%",
+    "#def",
+    "hsl(0,0,0)",
+    "foo",
+    "who are you"
+  ],
+  "map": {
+    "short-hex-color": "#def",
+    "short-hex-color-with-alpha": "#def0",
+    "string": "foo",
+    "string-with-spaces": "who are you"
+  }
+}

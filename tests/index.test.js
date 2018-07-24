@@ -42,6 +42,10 @@ describe('json-importer', () => {
         func(generate('tests/fixtures/list.json'))
           .then(result => expect(result).toMatchSnapshot())
       ));
+      it('should not resolve Sass values to quoted strings', () => (
+        func(generate('tests/fixtures/values.json'))
+          .then(result => expect(result).toMatchSnapshot())
+      ));
       it('should resolve json files in includePaths', () => (
         func(generate('fixtures/flat.json'), { includePaths: ['tests']})
           .then(result => expect(result).toMatchSnapshot())
