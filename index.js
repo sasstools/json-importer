@@ -34,8 +34,8 @@ module.exports = function(url, prev, done) {
   done = end(done);
   if (!url) return done(null);
 
-  const parts = url.split('/');
-  const name = path.basename(parts.pop(), '.json');
+  if (path.extname(url) !== '.json') return done(null);
+  const name = path.basename(url, '.json')
   const cwd = process.cwd();
 
 
